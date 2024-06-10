@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Encoder</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .container {
+        max-width: 500px;
+        margin: auto;
+      }
+      input,
+      textarea,
+      button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        padding: 10px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Text Encoder</h1>
+      <label for="inputText">Enter text to encode:</label>
+      <textarea id="inputText" rows="4"></textarea>
+
+      <label for="key">Enter key:</label>
+      <input type="text" id="key" />
+
+      <button onclick="encodeText()">Encode</button>
+
+      <h2>Encoded Text:</h2>
+      <textarea id="encodedText" rows="4" readonly></textarea>
+    </div>
+
+    <script>
+      function encodeText() {
+        const inputText = document.getElementById("inputText").value;
+        const key = document.getElementById("key").value;
+        const encodedText = encodeString(inputText, key);
+        document.getElementById("encodedText").value = encodedText;
+      }
+
+      function encodeString(inputString, key) {
+        let encodedChars = [];
+        for (let i = 0; i < inputString.length; i++) {
+          let key_c = key[i % key.length];
+          let encoded_c = String.fromCharCode(
+            (inputString.charCodeAt(i) + key_c.charCodeAt(0)) % 256
+          );
+          encodedChars.push(encoded_c);
+        }
+        return encodedChars.join("");
+      }
+    </script>
+  </body>
+</html>
