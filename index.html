@@ -30,9 +30,6 @@
       <label for="inputText">Enter text to encode:</label>
       <textarea id="inputText" rows="4"></textarea>
 
-      <label for="key">Enter key:</label>
-      <input type="text" id="key" />
-
       <button onclick="encodeText()">Encode</button>
 
       <h2>Encoded Text:</h2>
@@ -40,9 +37,10 @@
     </div>
 
     <script>
+      const key = "mysecretkey"; // Hardcoded key
+
       function encodeText() {
         const inputText = document.getElementById("inputText").value;
-        const key = document.getElementById("key").value;
         const encodedText = encodeString(inputText, key);
         document.getElementById("encodedText").value = encodedText;
       }
